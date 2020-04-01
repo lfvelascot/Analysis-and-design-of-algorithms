@@ -1,0 +1,36 @@
+Estados Unidos-94238-1200
+Canadá-1378-19
+Brasil-1209-18
+Chile-632-1
+Ecuador-532-7
+Perú-318-5
+México-251-2
+Panamá-245-3
+Colombia-231-2
+Argentina-225-0
+República Dominicana-202-3
+Uruguay-135-0
+Costa Rica-117-2
+Venezuela-70-0
+Trinidad y Tobago-50-0
+Honduras-26-0
+Bolivia-24-0
+Paraguay-22-1
+Cuba-21-1
+Guatemala-17-1
+Jamaica-16-1
+Barbados-14-0
+Guyana-7-0
+Surinam-5-0
+Bahamas-4-0
+El Salvador-3-0
+Haití-2-0
+Nicaragua-2-0
+Santa Lucía-2-0
+Antigua y Barbuda-1-0
+San Vicente y las Granadinas-1-0
+Camerum-0-0
+Belice-0-0
+Dominica-0-0
+Granada-0-0
+San Cristóbal y Nieves-0-0
