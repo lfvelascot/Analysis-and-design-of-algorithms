@@ -6,7 +6,7 @@ Repositorios de la clase de Analisis y diseño de algoritmos, donde estaran los 
 
   - Proyectos
   - Ejercicios de matatones
-  - Algoritmos
+  - Algoritmos de la materia
 
 # Hecho por : Luis Felipe Velasco Tao!
 
