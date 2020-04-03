@@ -7,7 +7,7 @@ Repository of the class of Analysis and design of algorithms, where the projects
   - Marathon exercises
   - Algorithms of matter
 
-### Made by: Luis Felipe Velasco Tao
+### Content list
 | Activities |                       Description                     |
 | ------ | ------ |
 | Exercise log |Contains all the exercises done related to programming marathons, exercises done in java or python with flow diagrams and pseudo code.Here you can find the executables (.java) and the document where the statements, flow diagrams, equations and pseudocode of each of the exercises are found in the document "ExerciseLog.docx". [Click here to see to the document.](https://github.com/lfvelascot/Analysis-and-design-of-algorithms/tree/master/Sorting%20Methods)  --- [Click here to go to the folder.](https://github.com/lfvelascot/Analysis-and-design-of-algorithms/tree/master/exerciseLog/src/anlisisAlgoritmos/sis/ing/usbbog/edu/co)    [![UrIOnline ](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSIG0ETU2saYktROJsfEJvPuhcWEyvsWu1UFtSyajGTKsPK7RQC&usqp=CAU)](https://www.urionlinejudge.com.br/judge/en/login)|
