@@ -1,6 +1,6 @@
 # Analysis and design of algorithms
 
-[![N|Solid](https://lh3.googleusercontent.com/proxy/8-3ToDu8s0eGHZyKDRAGw4cjjVk1xCV-8XgqWW4l6kEw2MTN_jVLbYRh2E4k-gKkY4yALRFYczPbOoP9)](https://www.usbbog.edu.co/)
+[![USBBOG](https://lh3.googleusercontent.com/proxy/8-3ToDu8s0eGHZyKDRAGw4cjjVk1xCV-8XgqWW4l6kEw2MTN_jVLbYRh2E4k-gKkY4yALRFYczPbOoP9)](https://www.usbbog.edu.co/)
 
 Repository of the class of Analysis and design of algorithms, where the projects and other activities carried out in class such as the following will be:
   - Projects
