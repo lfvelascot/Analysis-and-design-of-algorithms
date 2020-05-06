@@ -1,0 +1,191 @@
+-- ORACLE 
+
+CREATE TABLESPACE "panaderia_db" LOGGING
+DATAFILE 'C:\databases\esquemas\panaderia_db.dbf' SIZE 1024M
+EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+CREATE TABLESPACE "panaderia_dx" LOGGING
+DATAFILE 'C:\databases\esquemas\panaderia_dx.dbf' SIZE 512M
+EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+CREATE USER "panaderia_app" PROFILE "DEFAULT" IDENTIFIED BY "password"
+DEFAULT TABLESPACE "panaderia_db" 
+TEMPORARY TABLESPACE "TEMP" ACCOUNT UNLOCK;
+
+GRANT ALTER ANY INDEX TO "panaderia_app";
+GRANT ALTER ANY SEQUENCE TO "panaderia_app";
+GRANT ALTER ANY TABLE TO "panaderia_app";
+GRANT ALTER ANY TRIGGER TO "panaderia_app";
+GRANT CREATE ANY INDEX TO "panaderia_app";
+GRANT CREATE ANY SEQUENCE TO "panaderia_app";
+GRANT CREATE ANY SYNONYM TO "panaderia_app";
+GRANT CREATE ANY TABLE TO "panaderia_app";
+GRANT CREATE ANY TRIGGER TO "panaderia_app";
+GRANT CREATE ANY VIEW TO "panaderia_app";
+GRANT CREATE PROCEDURE TO "panaderia_app";
+GRANT CREATE PUBLIC SYNONYM TO "panaderia_app";
+GRANT CREATE TRIGGER TO "panaderia_app";
+GRANT CREATE VIEW TO "panaderia_app";
+GRANT DELETE ANY TABLE TO "panaderia_app";
+GRANT DROP ANY INDEX TO "panaderia_app";
+GRANT DROP ANY SEQUENCE TO "panaderia_app";
+GRANT DROP ANY TABLE TO "panaderia_app";
+GRANT DROP ANY TRIGGER TO "panaderia_app";
+GRANT DROP ANY VIEW TO "panaderia_app";
+GRANT INSERT ANY TABLE TO "panaderia_app";
+GRANT QUERY REWRITE TO "panaderia_app";
+GRANT SELECT ANY TABLE TO "panaderia_app";
+GRANT UNLIMITED TABLESPACE TO "panaderia_app";
+
+create table producto(
+fecha varchar2 (45) not null,
+nombre varchar2(45) not null,
+marca varchar2(45) not null,
+fechav varchar2(10) not null,
+costo number (10,2) not null,
+cantidad number (5) not null,
+total number (10,2) not null,
+primary key (fecha,nombre));
+
+INSERT INTO producto VALUES('27/04/2020 14:20:55', 'PAN BLANCO', 'PROPIA', '12/06/2020', 1500.0, 2,3000.0 );
+INSERT INTO producto VALUES('27/04/2020 14:34:16', 'MANTEQUILLA SIN SAL', 'LA BUENA', '05/08/2020', 2500.0, 1,2500.0 );
+INSERT INTO producto VALUES('27/04/2020 14:35:16', 'MANTEQUILLA CON SAL', 'LA BUENA', '05/08/2020', 2500.0, 1,2500.0 );
+INSERT INTO producto VALUES('27/04/2020 15:00:00', 'PAN MOGOLLA INTEGRAL', 'PROPIA', '12/06/2020', 350.0, 10,3500.0 );
+INSERT INTO producto VALUES('28/04/2020 15:51:16', 'LECHE DESLACTOSADA', 'ALPINA', '02/06/2020', 3000.0, 2,6000.0 );
+INSERT INTO producto VALUES('28/04/2020 15:53:09', 'MARGARINA', 'GUSTOSITA', '06/06/2020', 1500.0, 2,3000.0 );
+INSERT INTO producto VALUES('28/04/2020 16:17:16', 'LIBERALES', 'PROPIA', '05/05/2020', 500.0, 2,1000.0 );
+
+
+create table producto_respaldo(
+id number not null,
+fecha varchar2 (45) not null,
+nombre varchar2(45) not null,
+marca varchar2(45) not null,
+fechav varchar2(10) not null,
+costo number (10,2) not null,
+cantidad number (5) not null,
+total number (10,2) not null,
+accion varchar2(45) not null,
+primary key (id));
+
+CREATE SEQUENCE iter
+START WITH 1
+INCREMENT BY 1;
+
+create table log(
+id number not null ,
+proceso varchar2(45) not null,
+fecha varchar2(45) not null,
+primary key (id));
+
+insert into log (id,proceso,fecha) values (iter.nextval,'Dato eliminado en la tabla productos',(select to_char((select systimestamp from dual),'DD/MM/YYYY HH24:MI:SS')from dual));
+
+select * from log;
+
+
+CREATE OR REPLACE TRIGGER insert_trigger  AFTER INSERT ON producto
+FOR EACH ROW
+BEGIN
+insert into log (id,proceso,fecha) values (iter.nextval,'Dato ingresado en la tabla productos',(select to_char((select systimestamp from dual),'DD/MM/YYYY HH24:MI:SS')from dual));
+END insert_trigger;
+
+CREATE OR REPLACE TRIGGER delete_trigger  AFTER delete ON producto
+FOR EACH ROW
+BEGIN
+insert into log (id,proceso,fecha) values (iter.nextval,'Dato eliminado en la tabla productos',(select to_char((select systimestamp from dual),'DD/MM/YYYY HH24:MI:SS')from dual));
+END delete_trigger;
+
+CREATE OR REPLACE TRIGGER update_trigger  AFTER update ON producto
+FOR EACH ROW
+BEGIN
+insert into log (id,proceso,fecha) values (iter.nextval,'Dato actualizado en la tabla productos',(select to_char((select systimestamp from dual),'DD/MM/YYYY HH24:MI:SS')from dual));
+END delete_trigger;
+
+
+-- SQL
+
+create database panaderia_db;
+create user 'panaderia_app'@'%' identified by 'password';
+grant all privileges on panaderia_db.* to 'panaderia_app'@'%';
+ALTER USER 'panaderia_app'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+use panaderia_db;
+
+create table if not exists producto(
+fecha varchar (45) not null,
+nombre varchar(45) not null,
+marca varchar(45) not null,
+fechav varchar(10) not null,
+costo double (10,2) not null,
+cantidad int (5) not null,
+total double (10,2) not null,
+primary key (fecha,nombre));
+
+create table if not exists producto_respaldo(
+id int AUTO_INCREMENT,
+fecha varchar (45) not null,
+nombre varchar(45) not null,
+marca varchar(45) not null,
+fechav varchar(10) not null,
+costo double (10,2) not null,
+cantidad int (5) not null,
+total double (10,2) not null,
+accion varchar(45) not null,
+primary key (id));
+
+create table if not exists log(
+id int AUTO_INCREMENT,
+proceso varchar(45) not null,
+fecha varchar(45) not null,
+primary key (id));
+
+
+insert into producto values ((date_format((select now()),'%d/%m/%Y %T')),"PAN ARABE","PROPIO","01/05/2020",3500.00,5,(costo*cantidad));
+insert into producto values ((date_format((select now()),'%d/%m/%Y %T')),"LECHE","ALPINA","10/05/2020",2800.00,2,(costo*cantidad));
+insert into producto values ((date_format((select now()),'%d/%m/%Y %T')),"PAN ROLLO","PROPIO","01/05/2020",300.00,5,(costo*cantidad));
+insert into producto values ((date_format((select now()),'%d/%m/%Y %T')),"YYYYY","PROPIO","01/05/2020",300.00,5,(costo*cantidad));
+
+
+select * from log;
+SELECT MAX(id) FROM panaderia_db.log group by id ;
+
+SELECT proceso, fecha FROM log WHERE id = (SELECT MAX(id) FROM log);
+SELECT * FROM panaderia_db.producto WHERE fecha like '27/04/2020%';
+SELECT LOCATE('bar', 'foobarbar');
+
+
+DELIMITER //
+CREATE TRIGGER log_insert_trigger  AFTER INSERT ON producto
+FOR EACH ROW
+BEGIN
+insert into log (proceso,fecha) values ("Dato ingresado en la tabla productos",(select now()));
+END;//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER log_update_trigger AFTER update ON producto
+FOR EACH ROW
+BEGIN
+insert into log (proceso,fecha) values ("Dato actualizado en la tabla productos",(select now()));
+END;//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER log_delete_trigger  AFTER DELETE ON producto
+FOR EACH ROW
+BEGIN
+insert into log (proceso,fecha) values ("Dato eliminado en la tabla productos",(select now()));
+END;//
+DELIMITER ;
+
+select * from producto;
+select * from log;
+select * from producto_respaldo;
+
+drop trigger log_insert_trigger;
+drop trigger log_update_trigger;
+drop trigger log_delete_trigger;
+
+drop table log;
+drop table producto;
+drop table producto_respaldo;
+drop database panaderia_db;
