@@ -1,0 +1,6 @@
+def divide():
+	opc1=(float(input("Primer numero : ")))
+	opc2=(float(input("Primer numero : ")))
+	print("La division : ",opc1," / ",opc2," es ",(opc1/opc2),"\n FIN PROGRAMA")
+
+divide()
