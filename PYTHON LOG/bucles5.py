@@ -14,14 +14,14 @@ def correos():
 	email=input("Ingrese correo : ")
 	for i in email:
 		if i=="@":
-			arroba=True
+			arroba = "TRUE"
 			break;
 	else:
-		arroba=False
+		arroba="FALSE"
 
 	print(arroba)
 
-correos()
+espacios()
 
 
 
